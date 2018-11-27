@@ -89,6 +89,10 @@ export default {
   width: 80px;
   background-color: black;
 }
+
+.sevenSeg-view use {
+  cursor: pointer;
+}
 </style>
         
         

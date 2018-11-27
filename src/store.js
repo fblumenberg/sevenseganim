@@ -2,9 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 import uuidv4 from "uuid/v4";
 
+import createPersistedState from "vuex-persistedstate";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({
+      key: "sevenseganim"
+    })
+  ],
   state: {
     animItems: []
   },
@@ -32,6 +39,9 @@ export default new Vuex.Store({
           arr.splice(idx, 1);
         }
       });
+    },
+    updateAnimItems(state, newAnimItems) {
+      Vue.set(state, "animItems", newAnimItems);
     },
     clearAnimItems(state) {
       Vue.set(state, "animItems", []);
