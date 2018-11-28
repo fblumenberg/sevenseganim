@@ -41,6 +41,7 @@ export default new Vuex.Store({
       });
     },
     updateAnimItems(state, newAnimItems) {
+      console.log("Will update state", newAnimItems);
       Vue.set(state, "animItems", newAnimItems);
     },
     clearAnimItems(state) {

@@ -19,6 +19,12 @@
           <b-field label="Delay">
             <b-input type="number" v-model="delay"></b-input>
           </b-field>
+          <b-field>
+            <b-input v-for="(v,idx) in values" :key="idx" :value="binary(v)" is-static readonly></b-input>
+          </b-field>
+          <b-field>
+            <b-input v-for="(v,idx) in values" :key="idx" :value="v" is-static readonly></b-input>
+          </b-field>
         </section>
       </div>
     </div>
@@ -55,6 +61,9 @@ export default {
     }
   },
   methods: {
+    binary: function(value) {
+      return "0b" + value.toString(2).padStart(8, "0");
+    },
     segmentForDigit: function(digit) {
       return this.animItem.segments[digit] & 0xff;
     },
