@@ -1,3 +1,3 @@
 module.exports = {
-  baseUrl: process.env.NODE_ENV === "production" ? "/sevenseg/" : "/"
+  baseUrl: process.env.NODE_ENV === "production" ? "./" : "/"
 };
