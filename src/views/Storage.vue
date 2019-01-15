@@ -109,7 +109,7 @@ Item items[] = {`;
 
       console.log(this.items);
       this.items.forEach(element => {
-        cdata = cdata + `\n  {{${element.segments}},${element.delay},`;
+        cdata = cdata + `\n  {{${element.segments}},${element.delay}},`;
       });
 
       cdata =
