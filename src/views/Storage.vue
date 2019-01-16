@@ -39,6 +39,25 @@
           </pre>
         </section>
       </b-tab-item>
+      <b-tab-item label="JSON-Sourcecode (Frames)">
+        <section style="text-align:left">
+          <div class="field">
+            <div class="control">
+              <button
+                type="button"
+                class="button"
+                v-clipboard:copy="jsonCode2"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError"
+              >Copy!</button>
+            </div>
+          </div>
+          <pre v-highlightjs="jsonCode2">
+            <code class="javscript">
+            </code>
+          </pre>
+        </section>
+      </b-tab-item>
       <b-tab-item label="JSON-Update">
         <div class="field">
           <div class="control">
@@ -97,6 +116,9 @@ export default {
     jsonCode: function() {
       return JSON.stringify(this.items, null, 4);
     },
+    jsonCode2: function() {
+      return JSON.stringify(this.$store.state, null, 4);
+    },
     cCode: function() {
       var cdata = `
 struct Item
@@ -121,6 +143,7 @@ Item items[] = {`;
       return cdata;
     },
     ...mapState({
+      frames: state => state.animFrames,
       items: state => state.animItems,
       count: state => state.animItems.length
     })

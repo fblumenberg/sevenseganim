@@ -13,9 +13,27 @@ export default new Vuex.Store({
     })
   ],
   state: {
-    animItems: []
+    animItems: [],
+    animFrames: {}
   },
   mutations: {
+    newAnimFrame(state, id) {
+      var frame = {
+        id: id,
+        segments: [0, 0, 0, 0]
+      };
+      Vue.set(state.animFrames, id, frame);
+    },
+    deleteAnimFrame(state, id) {
+      Vue.delete(state.animFrames, id);
+    },
+    updateAnimFrame(state, frame) {
+      Vue.set(state.animFrames, frame.id, frame);
+    },
+    clearAnimFrames(state) {
+      Vue.set(state, "animFrames", {});
+    },
+
     newAnimItem(state) {
       var item = {
         id: uuidv4(),

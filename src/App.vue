@@ -17,6 +17,7 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item" to="/edit">Editor</router-link>
+          <router-link class="navbar-item" to="/frameedit">Frame Editor</router-link>
           <router-link class="navbar-item" to="/storage">Storage</router-link>
         </div>
         <div class="navbar-end">
