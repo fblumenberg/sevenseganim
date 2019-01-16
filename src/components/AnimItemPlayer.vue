@@ -63,6 +63,7 @@ export default {
       state: stateStopped,
       itemIndex: 0,
       currentItem: {
+        frameId: "",
         segments: [0, 0, 0, 0],
         delay: 500
       }
@@ -70,9 +71,15 @@ export default {
   },
   computed: {
     values: function() {
-      return this.currentItem.segments;
+      var f = this.frames[this.currentItem.frameId];
+      if (f === undefined) {
+        return [0, 0, 0, 0];
+      }
+
+      return f.segments;
     },
     ...mapState({
+      frames: state => state.animFrames,
       items: state => state.animItems,
       count: state => state.animItems.length
     })

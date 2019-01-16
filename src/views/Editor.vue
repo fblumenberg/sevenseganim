@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     add: function() {
-      this.$store.commit("newAnimItem");
+      this.$store.commit("newAnimItem", "blink");
     },
     deleteItem: function(e, item) {
       console.log("Delete", item);

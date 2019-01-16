@@ -34,10 +34,10 @@ export default new Vuex.Store({
       Vue.set(state, "animFrames", {});
     },
 
-    newAnimItem(state) {
+    newAnimItem(state, fId) {
       var item = {
         id: uuidv4(),
-        segments: [0, 0, 0, 0],
+        frameId: fId,
         delay: 500
       };
 

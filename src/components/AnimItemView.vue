@@ -16,14 +16,11 @@
       </div>
       <div class="column">
         <section>
+          <b-field label="Frame">
+            <b-input v-model="frame"></b-input>
+          </b-field>
           <b-field label="Delay">
             <b-input type="number" v-model="delay"></b-input>
-          </b-field>
-          <b-field>
-            <b-input v-for="(v,idx) in values" :key="idx" :value="binary(v)" is-static readonly></b-input>
-          </b-field>
-          <b-field>
-            <b-input v-for="(v,idx) in values" :key="idx" :value="v" is-static readonly></b-input>
           </b-field>
         </section>
       </div>
@@ -33,6 +30,7 @@
         
 <script>
 import Vue from "vue";
+import _ from "lodash";
 import SevenSeg from "@/components/SevenSeg.vue";
 
 export default {
@@ -56,8 +54,25 @@ export default {
         this.$store.commit("updateAnimItem", this.animItem);
       }
     },
+    frame: {
+      get: function() {
+        return this.animItem.frameId;
+      },
+      set: function(newValue) {
+        this.animItem.frameId = newValue;
+        this.$store.commit("updateAnimItem", this.animItem);
+      }
+    },
     values: function() {
-      return this.animItem.segments;
+      var f = this.$store.state.animFrames[this.animItem.frameId];
+      if (f === undefined) {
+        return [0, 0, 0, 0];
+      }
+
+      return f.segments;
+    },
+    frameIds: function() {
+      return this.$store.state.animFrames.keys();
     }
   },
   methods: {
@@ -65,21 +80,10 @@ export default {
       return "0b" + value.toString(2).padStart(8, "0");
     },
     segmentForDigit: function(digit) {
-      return this.animItem.segments[digit] & 0xff;
+      return this.values[digit] & 0xff;
     },
     segmentClicked: function(data) {
-      console.log("Need change data", data);
-
-      var curr = this.values[data.digit];
-      var newValue;
-      if (data.on) {
-        newValue = curr & ~(1 << data.index);
-      } else {
-        newValue = curr | (1 << data.index);
-      }
-
-      Vue.set(this.values, data.digit, newValue);
-      this.$store.commit("updateAnimItem", this.animItem);
+      console.log("No change data", data);
     },
     valueChanged: function(v) {
       console.log("Changed:", v);
