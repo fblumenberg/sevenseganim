@@ -121,9 +121,37 @@ export default {
     },
     cCode: function() {
       var cdata = `
+// Frames:
+
+typedef byte Frame[4];
+
+`;
+
+      var frameIdx = 0;
+      for (var prop in this.frames) {
+        var element = this.frames[prop];
+        cdata = cdata + `\nconst int ${element.id}=${frameIdx++};`;
+      }
+
+      cdata =
+        cdata +
+        `
+
+Frame frames[] = {`;
+
+      for (var prop in this.frames) {
+        var element = this.frames[prop];
+        cdata = cdata + `\n  {${element.segments}}, // ${prop}`;
+      }
+
+      cdata =
+        cdata +
+        `
+};
+
 struct Item
 {
-  byte segments[4];
+  int frame;
   int16_t delay;
 };
 
@@ -131,7 +159,7 @@ Item items[] = {`;
 
       console.log(this.items);
       this.items.forEach(element => {
-        cdata = cdata + `\n  {{${element.segments}},${element.delay}},`;
+        cdata = cdata + `\n  {${element.frameId},${element.delay}},`;
       });
 
       cdata =
