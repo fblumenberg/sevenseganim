@@ -74,12 +74,41 @@
             <textarea v-model="jsonToUpdate" class="textarea" rows="20" placeholder="JSON data"></textarea>
           </div>
         </div>
+        <b-field>
+          <b-upload v-model="dropFiles" multiple drag-drop>
+            <section class="section">
+              <div class="content has-text-centered">
+                <p>
+                  <b-icon icon="upload" size="is-large"></b-icon>
+                </p>
+                <p>Drop your files here or click to upload</p>
+              </div>
+            </section>
+          </b-upload>
+        </b-field>
+        <div class="field">
+          <div class="control">
+            <button @click="upload" class="button is-danger">Load</button>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span v-for="(file, index) in dropFiles" :key="index" class="tag is-primary">
+            {{file.name}}
+            <button
+              class="delete is-small"
+              type="button"
+              @click="deleteDropFile(index)"
+            ></button>
+          </span>
+        </div>
       </b-tab-item>
     </b-tabs>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import { mapState } from "vuex";
 
 const exportJson = "JSON";
@@ -89,19 +118,37 @@ export default {
   name: "storage",
   data: function() {
     return {
-      jsonToUpdate: ""
+      jsonToUpdate: "",
+      dropFiles: []
     };
   },
   methods: {
     update: function() {
       var newItems = JSON.parse(this.jsonToUpdate);
-      this.$store.commit("updateAnimItems", newItems);
+      this.$store.commit("updateAnimFrames", newItems.animFrames);
+      this.$store.commit("updateAnimItems", newItems.animItems);
     },
     onCopy: function(e) {
       // alert("You just copied: " + e.text);
     },
     onError: function(e) {
       alert("Failed to copy texts");
+    },
+    upload: function(e) {
+      console.log("this.dropFiles.length");
+
+      if (this.dropFiles.length > 0) {
+        const reader = new FileReader();
+        let that = this;
+        reader.onload = function(e) {
+          that.jsonToUpdate = e.currentTarget.result;
+          that.dropFiles.splice(0, 1);
+        };
+        reader.readAsText(this.dropFiles[0]);
+      }
+    },
+    deleteDropFile(index) {
+      this.dropFiles.splice(index, 1);
     }
   },
   computed: {
@@ -109,6 +156,7 @@ export default {
       try {
         JSON.parse(this.jsonToUpdate);
       } catch (error) {
+        console.log(error);
         return true;
       }
       return false;

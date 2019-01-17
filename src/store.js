@@ -33,6 +33,10 @@ export default new Vuex.Store({
     clearAnimFrames(state) {
       Vue.set(state, "animFrames", {});
     },
+    updateAnimFrames(state, newAnimFrames) {
+      console.log("Will update state", newAnimFrames);
+      Vue.set(state, "animFrames", newAnimFrames);
+    },
 
     newAnimItem(state, fId) {
       var item = {
@@ -58,9 +62,9 @@ export default new Vuex.Store({
         }
       });
     },
-    updateAnimItems(state, newAnimItems) {
-      console.log("Will update state", newAnimItems);
-      Vue.set(state, "animItems", newAnimItems);
+    updateAnimItems(state, newAnimFrames) {
+      console.log("Will update state", newAnimFrames);
+      Vue.set(state, "animItems", newAnimFrames);
     },
     clearAnimItems(state) {
       Vue.set(state, "animItems", []);

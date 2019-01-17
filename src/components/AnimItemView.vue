@@ -17,12 +17,16 @@
       <div class="column">
         <section>
           <b-field label="Frame">
-            <b-input v-model="frame"></b-input>
-          </b-field>
-          <b-field label="Delay">
-            <b-input type="number" v-model="delay"></b-input>
+            <b-select v-model="frame" placeholder="Select a name">
+              <option v-for="option in frameIds" :value="option" :key="option">{{ option}}</option>
+            </b-select>
           </b-field>
         </section>
+      </div>
+      <div class="column">
+        <b-field label="Delay">
+          <b-input type="number" v-model="delay"></b-input>
+        </b-field>
       </div>
     </div>
   </div>
@@ -72,7 +76,7 @@ export default {
       return f.segments;
     },
     frameIds: function() {
-      return this.$store.state.animFrames.keys();
+      return Object.keys(this.$store.state.animFrames);
     }
   },
   methods: {
@@ -103,9 +107,9 @@ export default {
   background-color: black;
 }
 
-.sevenSeg-view use {
+/* .sevenSeg-view use {
   cursor: pointer;
-}
+} */
 </style>
         
         
