@@ -92,13 +92,13 @@ export default {
   },
   created: function() {
     if (Object.keys(this.animations).length > 0) {
-      currentAnimationName = Object.keys(this.animations)[0].name;
+      this.currentAnimationName = Object.keys(this.animations)[0].name;
     }
     console.log("Created");
   },
   computed: {
     currentAnimation: function() {
-      return animations[currentAnimationName];
+      return this.animations[this.currentAnimationName] || {};
     },
     itemsToDrag: {
       get: function() {

@@ -21,7 +21,7 @@ export default new Vuex.Store({
     newAnimation(state, name) {
       var frame = {
         name: name,
-        active: false
+        items: []
       };
       Vue.set(state.animations, name, frame);
     },
