@@ -92,9 +92,18 @@ export default {
   },
   created: function() {
     if (Object.keys(this.animations).length > 0) {
-      this.currentAnimationName = Object.keys(this.animations)[0].name;
+      this.currentAnimationName = this.animations[
+        Object.keys(this.animations)[0]
+      ].name;
     }
-    console.log("Created");
+    console.log(
+      "Created",
+      this.currentAnimationName,
+      Object.keys(this.animations)
+    );
+  },
+  mounted: function() {
+    console.log("Mounted");
   },
   computed: {
     currentAnimation: function() {
@@ -121,7 +130,8 @@ export default {
         message: `Animation Name?`,
         inputAttrs: {
           placeholder: "e.g. blink",
-          maxlength: 40
+          maxlength: 40,
+          required: true
         },
         onConfirm: value => this.$store.commit("newAnimation", value)
       });

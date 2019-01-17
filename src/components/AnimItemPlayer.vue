@@ -61,6 +61,12 @@ const statePausing = 2;
 
 export default {
   name: "AnimItemPlayer",
+  props: {
+    animation: {
+      type: Object,
+      required: true
+    }
+  },
   data: function() {
     return {
       loop: true,
@@ -82,10 +88,14 @@ export default {
 
       return f.segments;
     },
+    items: function() {
+      return this.animation.items;
+    },
+    count: function() {
+      return this.animation.items.length;
+    },
     ...mapState({
-      frames: state => state.animFrames,
-      items: state => state.animItems,
-      count: state => state.animItems.length
+      frames: state => state.animFrames
     })
   },
   methods: {

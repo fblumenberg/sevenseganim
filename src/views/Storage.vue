@@ -125,6 +125,7 @@ export default {
   methods: {
     update: function() {
       var newItems = JSON.parse(this.jsonToUpdate);
+      this.$store.commit("updateAnimations", newItems.animations);
       this.$store.commit("updateAnimFrames", newItems.animFrames);
       this.$store.commit("updateAnimItems", newItems.animItems);
     },
@@ -153,12 +154,15 @@ export default {
   },
   computed: {
     isJsonToUpdateInvalid: function() {
+      if (this.jsonToUpdate.length > 0) return false;
+
       try {
         JSON.parse(this.jsonToUpdate);
       } catch (error) {
         console.log(error);
         return true;
       }
+
       return false;
     },
     jsonCode: function() {
@@ -177,8 +181,8 @@ typedef byte Frame[4];
 
       var frameIdx = 0;
       for (var prop in this.frames) {
-        var element = this.frames[prop];
-        cdata = cdata + `\nconst int ${element.id}=${frameIdx++};`;
+        var item = this.frames[prop];
+        cdata = cdata + `\nconst int ${item.id}=${frameIdx++};`;
       }
 
       cdata =
@@ -188,8 +192,8 @@ typedef byte Frame[4];
 Frame frames[] = {`;
 
       for (var prop in this.frames) {
-        var element = this.frames[prop];
-        cdata = cdata + `\n  {${element.segments}}, // ${prop}`;
+        var item = this.frames[prop];
+        cdata = cdata + `\n  {${item.segments}}, // ${prop}`;
       }
 
       cdata =
@@ -202,25 +206,23 @@ struct Item
   int frame;
   int16_t delay;
 };
-
-Item items[] = {`;
-
-      console.log(this.items);
-      this.items.forEach(element => {
-        cdata = cdata + `\n  {${element.frameId},${element.delay}},`;
-      });
-
-      cdata =
-        cdata +
-        `
-};
-        `;
+`;
+      for (var prop in this.animations) {
+        var anim = this.animations[prop];
+        cdata = cdata + `\n\nItem ${anim.name}[] = {`;
+        anim.items.forEach(item => {
+          cdata = cdata + `\n  {${item.frameId},${item.delay}},`;
+        });
+        cdata = cdata + `\n};`;
+        cdata = cdata + `\nconst int ${anim.name}Size=${anim.items.length};`;
+      }
 
       return cdata;
     },
     ...mapState({
       frames: state => state.animFrames,
       items: state => state.animItems,
+      animations: state => state.animations,
       count: state => state.animItems.length
     })
   }

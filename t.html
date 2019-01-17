@@ -1,0 +1,46 @@
+<template>
+  <div>
+    <div class="columns">
+      <div class="column">
+        <div class="is-inline-flex">
+          <SevenSeg
+            class="sevenSeg-view"
+            v-for="(v,idx) in values"
+            v-on:segmentclicked="segmentClicked"
+            :key="idx"
+            :digit="idx"
+            offColor="#320000"
+            :value="segmentForDigit(idx)"
+          ></SevenSeg>
+        </div>
+      </div>
+      <div class="column">
+        <section>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Frame</label>
+            </div>
+            <div class="field-body">
+              <b-select v-model="frame" placeholder="Select a name">
+                <option
+                  v-for="option in frameIds"
+                  :value="option"
+                  :key="option"
+                  >{{ option }}</option
+                >
+              </b-select>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Delay</label>
+            </div>
+            <div class="field-body">
+              <b-input type="number" v-model="delay"></b-input>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</template>

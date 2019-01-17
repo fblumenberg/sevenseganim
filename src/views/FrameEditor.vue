@@ -55,7 +55,8 @@ export default {
         message: `Frame name?`,
         inputAttrs: {
           placeholder: "e.g. blink",
-          maxlength: 10
+          maxlength: 30,
+          required: true
         },
         onConfirm: value => this.$store.commit("newAnimFrame", value)
       });

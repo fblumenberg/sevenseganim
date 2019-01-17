@@ -16,17 +16,25 @@
       </div>
       <div class="column">
         <section>
-          <b-field label="Frame">
-            <b-select v-model="frame" placeholder="Select a name">
-              <option v-for="option in frameIds" :value="option" :key="option">{{ option}}</option>
-            </b-select>
-          </b-field>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Frame</label>
+            </div>
+            <div class="field-body">
+              <b-select v-model="frame" placeholder="Select a name">
+                <option v-for="option in frameIds" :value="option" :key="option">{{ option}}</option>
+              </b-select>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Delay</label>
+            </div>
+            <div class="field-body">
+              <b-input type="number" v-model="delay"></b-input>
+            </div>
+          </div>
         </section>
-      </div>
-      <div class="column">
-        <b-field label="Delay">
-          <b-input type="number" v-model="delay"></b-input>
-        </b-field>
       </div>
     </div>
   </div>
