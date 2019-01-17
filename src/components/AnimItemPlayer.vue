@@ -14,33 +14,37 @@
         </div>
       </div>
       <div class="column">
-        <section>
-          <div class="field has-addons">
-            <p class="control">
-              <a class="button" @click="play">
-                <b-icon icon="play"></b-icon>
-                <span>Play</span>
-              </a>
-            </p>
-            <p class="control">
-              <a class="button" @click="pause">
-                <b-icon icon="pause"></b-icon>
-                <span>Pause</span>
-              </a>
-            </p>
-            <p class="control">
-              <a class="button" @click="stop">
-                <b-icon icon="stop"></b-icon>
-                <span>Stop</span>
-              </a>
-            </p>
+        <div class="field has-addons">
+          <p class="control">
+            <a class="button" @click="play">
+              <b-icon icon="play"></b-icon>
+              <span>Play</span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button" @click="pause">
+              <b-icon icon="pause"></b-icon>
+              <span>Pause</span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button" @click="stop">
+              <b-icon icon="stop"></b-icon>
+              <span>Stop</span>
+            </a>
+          </p>
+        </div>
+        <div>
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field">
+                <b-switch v-model="loop">Loop</b-switch>
+              </div>
+              <b-field label="Index">{{itemIndex}}</b-field>
+              <b-field label="State">{{state}}</b-field>
+            </div>
           </div>
-          <b-field>
-            <b-switch v-model="loop">Loop</b-switch>
-          </b-field>
-          <b-field label="Index">{{itemIndex}}</b-field>
-          <b-field label="State">{{state}}</b-field>
-        </section>
+        </div>
       </div>
     </div>
   </div>

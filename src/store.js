@@ -14,21 +14,43 @@ export default new Vuex.Store({
   ],
   state: {
     animItems: [],
-    animFrames: {}
+    animFrames: {},
+    animations: {}
   },
   mutations: {
-    newAnimFrame(state, id) {
+    newAnimation(state, name) {
       var frame = {
-        id: id,
+        name: name,
+        active: false
+      };
+      Vue.set(state.animations, name, frame);
+    },
+    deleteAnimation(state, name) {
+      Vue.delete(state.animations, name);
+    },
+    updateAnimation(state, animation) {
+      Vue.set(state.animations, animation.name, animation);
+    },
+    clearAnimations(state) {
+      Vue.set(state, "animations", {});
+    },
+    updateAnimations(state, newAnimFrames) {
+      console.log("Will update state", newAnimFrames);
+      Vue.set(state, "animations", newAnimFrames);
+    },
+
+    newAnimFrame(state, name) {
+      var frame = {
+        name: name,
         segments: [0, 0, 0, 0]
       };
-      Vue.set(state.animFrames, id, frame);
+      Vue.set(state.animFrames, name, frame);
     },
-    deleteAnimFrame(state, id) {
-      Vue.delete(state.animFrames, id);
+    deleteAnimFrame(state, name) {
+      Vue.delete(state.animFrames, name);
     },
     updateAnimFrame(state, frame) {
-      Vue.set(state.animFrames, frame.id, frame);
+      Vue.set(state.animFrames, frame.name, frame);
     },
     clearAnimFrames(state) {
       Vue.set(state, "animFrames", {});
@@ -40,7 +62,7 @@ export default new Vuex.Store({
 
     newAnimItem(state, fId) {
       var item = {
-        id: uuidv4(),
+        name: uuidv4(),
         frameId: fId,
         delay: 500
       };
@@ -49,15 +71,15 @@ export default new Vuex.Store({
     },
     updateAnimItem(state, animItem) {
       state.animItems.forEach(function(v, idx, arr) {
-        if (animItem.id === v.id) {
+        if (animItem.name === v.name) {
           Vue.set(arr, idx, animItem);
           return;
         }
       });
     },
-    deleteAnimItem(state, id) {
+    deleteAnimItem(state, name) {
       state.animItems.forEach(function(v, idx, arr) {
-        if (id === v.id) {
+        if (name === v.name) {
           arr.splice(idx, 1);
         }
       });
