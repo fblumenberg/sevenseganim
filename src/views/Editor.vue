@@ -21,7 +21,7 @@
             v-on:click="selectAnimation($event,animation)"
             class="button is-fullwidth"
             v-bind:class="{'is-primary': isActive(animation)}"
-          >{{animation.name}} {{isActive(animation)}}</div>
+          >{{animation.name}}</div>
         </div>
         <div class="media-right">
           <a class="delete is-medium" v-on:click="deleteAnimation($event,animation)"></a>
@@ -30,40 +30,6 @@
     </div>
     <div class="column">
       <AnimationEditor :animation="currentAnimation"></AnimationEditor>
-      <!--
-      <AnimItemPlayer v-model="editorValue"></AnimItemPlayer> 
-      <div>
-        Counts:
-        <span>{{count}}</span>
-      </div>
-      <div class="section">
-        <div class="level">
-          <div class="level-item">
-            <p class="control">
-              <a class="button" @click="add">
-                <b-icon icon="plus"></b-icon>
-                <span>Add Step</span>
-              </a>
-            </p>
-          </div>
-        </div>
-        <draggable v-model="itemsToDrag" @start="drag=true" @end="drag=false">
-          <div class="level" v-for="item in itemsToDrag" :key="item.id">
-            <div class="level-item">
-              <AnimItemView :animItem="item"></AnimItemView>
-            </div>
-            <div class="level-item">
-              <p class="control">
-                <a class="button" v-on:click="deleteItem($event,item)">
-                  <b-icon icon="minus"></b-icon>
-                  <span>Delete</span>
-                </a>
-              </p>
-            </div>
-          </div>
-        </draggable>
-      </div>
-      -->
     </div>
   </div>
 </template>
@@ -71,8 +37,6 @@
 <script>
 // @ is an alias to /src
 import { mapState } from "vuex";
-import AnimItemPlayer from "@/components/AnimItemPlayer.vue";
-import AnimItemView from "@/components/AnimItemView.vue";
 import AnimationEditor from "@/components/AnimationEditor.vue";
 import draggable from "vuedraggable";
 
@@ -80,9 +44,6 @@ export default {
   name: "editor",
   components: {
     AnimationEditor
-    // draggable,
-    // AnimItemPlayer,
-    // AnimItemView
   },
   data: function() {
     return {

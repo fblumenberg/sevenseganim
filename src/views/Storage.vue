@@ -217,6 +217,35 @@ struct Item
         cdata = cdata + `\nconst int ${anim.name}Size=${anim.items.length};`;
       }
 
+      cdata =
+        cdata +
+        `
+
+struct Animation
+{
+    Item *items;
+    int size;
+};
+
+Animation animations[]={
+`;
+
+      for (var prop in this.animations) {
+        var anim = this.animations[prop];
+        cdata = cdata + `\n  {${anim.name},${anim.items.length}},`;
+      }
+
+      cdata =
+        cdata +
+        `
+};
+`;
+      var animIdx = 0;
+      for (var prop in this.animations) {
+        var anim = this.animations[prop];
+        cdata = cdata + `\nconst int ${anim.name}Anim=${animIdx++};`;
+      }
+
       return cdata;
     },
     ...mapState({

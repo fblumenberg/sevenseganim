@@ -60,7 +60,7 @@ const statePlaying = 1;
 const statePausing = 2;
 
 export default {
-  name: "AnimItemPlayer",
+  name: "AnimationPlayer",
   props: {
     animation: {
       type: Object,
@@ -78,6 +78,12 @@ export default {
         delay: 500
       }
     };
+  },
+  watch: {
+    animation: function() {
+      console.log("Updated");
+      this.stop();
+    }
   },
   computed: {
     values: function() {

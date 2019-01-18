@@ -3,7 +3,7 @@
     <h1 class="title">{{animation.name}}</h1>
     <div class="level">
       <div class="level-item">
-        <AnimItemPlayer :animation="animation"></AnimItemPlayer>
+        <AnimationPlayer :animation="animation"></AnimationPlayer>
       </div>
     </div>
     <div class="section">
@@ -39,7 +39,7 @@
 <script>
 import Vue from "vue";
 import { mapState } from "vuex";
-import AnimItemPlayer from "@/components/AnimItemPlayer.vue";
+import AnimationPlayer from "@/components/AnimationPlayer.vue";
 import AnimItemView from "@/components/AnimItemView.vue";
 import draggable from "vuedraggable";
 import uuidv4 from "uuid/v4";
@@ -48,7 +48,7 @@ export default {
   name: "animationeditor",
   components: {
     draggable,
-    AnimItemPlayer,
+    AnimationPlayer,
     AnimItemView
   },
   props: {
