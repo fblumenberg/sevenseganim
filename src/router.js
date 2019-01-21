@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Editor from "./views/Editor.vue";
 import FrameEditor from "./views/FrameEditor.vue";

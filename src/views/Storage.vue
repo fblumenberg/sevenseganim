@@ -27,25 +27,6 @@
               <button
                 type="button"
                 class="button"
-                v-clipboard:copy="jsonCode"
-                v-clipboard:success="onCopy"
-                v-clipboard:error="onError"
-              >Copy!</button>
-            </div>
-          </div>
-          <pre v-highlightjs="jsonCode">
-            <code class="javscript">
-            </code>
-          </pre>
-        </section>
-      </b-tab-item>
-      <b-tab-item label="JSON-Sourcecode (Frames)">
-        <section style="text-align:left">
-          <div class="field">
-            <div class="control">
-              <button
-                type="button"
-                class="button"
                 v-clipboard:copy="jsonCode2"
                 v-clipboard:success="onCopy"
                 v-clipboard:error="onError"
@@ -127,7 +108,6 @@ export default {
       var newItems = JSON.parse(this.jsonToUpdate);
       this.$store.commit("updateAnimations", newItems.animations);
       this.$store.commit("updateAnimFrames", newItems.animFrames);
-      this.$store.commit("updateAnimItems", newItems.animItems);
     },
     onCopy: function(e) {
       // alert("You just copied: " + e.text);
@@ -164,9 +144,6 @@ export default {
       }
 
       return false;
-    },
-    jsonCode: function() {
-      return JSON.stringify(this.items, null, 4);
     },
     jsonCode2: function() {
       return JSON.stringify(this.$store.state, null, 4);

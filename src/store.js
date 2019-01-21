@@ -13,7 +13,6 @@ export default new Vuex.Store({
     })
   ],
   state: {
-    animItems: [],
     animFrames: {},
     animations: {}
   },
@@ -58,38 +57,6 @@ export default new Vuex.Store({
     updateAnimFrames(state, newAnimations) {
       console.log("Will update state", newAnimations);
       Vue.set(state, "animFrames", newAnimations);
-    },
-
-    newAnimItem(state, fId) {
-      var item = {
-        name: uuidv4(),
-        frameId: fId,
-        delay: 500
-      };
-
-      state.animItems.push(item);
-    },
-    updateAnimItem(state, animItem) {
-      state.animItems.forEach(function(v, idx, arr) {
-        if (animItem.name === v.name) {
-          Vue.set(arr, idx, animItem);
-          return;
-        }
-      });
-    },
-    deleteAnimItem(state, name) {
-      state.animItems.forEach(function(v, idx, arr) {
-        if (name === v.name) {
-          arr.splice(idx, 1);
-        }
-      });
-    },
-    updateAnimItems(state, newAnimations) {
-      console.log("Will update state", newAnimations);
-      Vue.set(state, "animItems", newAnimations);
-    },
-    clearAnimItems(state) {
-      Vue.set(state, "animItems", []);
     }
   },
   actions: {}
