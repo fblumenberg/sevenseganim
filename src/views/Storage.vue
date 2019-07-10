@@ -134,7 +134,7 @@ export default {
   },
   computed: {
     isJsonToUpdateInvalid: function() {
-      if (this.jsonToUpdate.length > 0) return false;
+      if (this.jsonToUpdate.length == 0) return false;
 
       try {
         JSON.parse(this.jsonToUpdate);

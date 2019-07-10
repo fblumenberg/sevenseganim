@@ -39,7 +39,7 @@ export default new Vuex.Store({
 
     newAnimFrame(state, name) {
       var frame = {
-        name: name,
+        id: name,
         segments: [0, 0, 0, 0]
       };
       Vue.set(state.animFrames, name, frame);
