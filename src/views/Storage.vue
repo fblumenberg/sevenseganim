@@ -209,7 +209,7 @@ Animation animations[]={
 
       for (var prop in this.animations) {
         var anim = this.animations[prop];
-        cdata = cdata + `\n  {${anim.name},${anim.items.length}},`;
+        cdata = cdata + `\n  {${anim.name},${anim.name}Size},`;
       }
 
       cdata =

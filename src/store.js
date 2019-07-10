@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import uuidv4 from "uuid/v4";
 
 import createPersistedState from "vuex-persistedstate";
 
